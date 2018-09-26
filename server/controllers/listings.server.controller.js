@@ -42,7 +42,29 @@ exports.update = function(req, res) {
 
   /** TODO **/
   /* Replace the article's properties with the new properties found in req.body */
-  /* Save the article */
+    /* Save the article */
+  listing.name = req.body.name;
+  listing.address = req.body.address;
+  listing.code = req.body.code;
+  listing.coordinates = req.body.coordinates;
+  
+  //listing.body = req.body;
+  listing.save(function (err) {
+      if (err) throw err;
+
+      res.json(listing);
+  });
+  //listing.body = req.body;
+  //listing.save();
+  /*Listing.findOneAndUpdate(listing.body, req.listing.body, function (err, listing) {
+      if (err) throw err;
+
+      // we have the updated user returned to us
+      //console.log(listing);
+      res.json(listing);
+      
+  });*/
+ // next();
 };
 
 /* Delete a listing */
@@ -50,13 +72,32 @@ exports.delete = function(req, res) {
   var listing = req.listing;
 
   /** TODO **/
-  /* Remove the article */
+    /* Remove the article */
+  listing.remove(function (err) {
+      if (err) throw err;
+
+      
+      res.json(listing);
+  });
+      //next();
+
+
+  
 };
 
 /* Retreive all the directory listings, sorted alphabetically by listing code */
 exports.list = function(req, res) {
   /** TODO **/
-  /* Your code here */
+    /* Your code here */
+    Listing.find({}, function (err, listings) {
+        if (err) throw err;
+
+        // object of all the listings
+        //console.log(listings);
+        res.send(listings);
+        
+    });
+    //next();
 };
 
 /* 
