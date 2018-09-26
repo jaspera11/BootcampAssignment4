@@ -31,7 +31,7 @@ module.exports.init = function() {
   /**TODO 
   Go to homepage for all routes not specified */
   app.use('*',function (req, res) {
-      res.redirect('/api/listings');
+      res.redirect('../client/index');
   });
 
   return app;
